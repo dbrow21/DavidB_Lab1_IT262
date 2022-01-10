@@ -1,0 +1,54 @@
+<html>
+<body>
+
+
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+     <div id="chart_div"></div>
+     
+<script>
+google.charts.load('current', {packages: ['gantt']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Task ID');
+  data.addColumn('string', 'Task Name');
+  data.addColumn('date', 'Start Date');
+  data.addColumn('date', 'End Date');
+  data.addColumn('number', 'Duration');
+  data.addColumn('number', 'Percent Complete');
+  data.addColumn('string', 'Dependencies');
+
+//analysis, design, code, test, deploy
+
+  data.addRows([
+    ['P1', 'initiate', new Date(2022, 0, 1), new Date(2022, 0, 6), null,  100,  null],
+    ['P2', 'plan', new Date(2022, 0, 7),new Date(2022, 0, 13), null, 25, 'P1'],
+    ['P3', 'execute', new Date(2022, 0, 14), new Date(2022, 0, 20), null, 20, 'P2'],
+    ['P3_1', 'analysis', new Date(2022, 0, 18), new Date(2022, 0, 20), null, 20, 'P3'],
+    ['P3_2', 'design', new Date(2022, 0, 18), new Date(2022, 0, 20), null, 20, 'P3'],
+    ['P3_3', 'code', new Date(2022, 0, 18), new Date(2022, 0, 20), null, 20, 'P3'],
+    ['P3_4', 'test', new Date(2022, 0, 18), new Date(2022, 0, 20), null, 20, 'P3'],
+    ['P3_5', 'deploy', new Date(2022, 0, 18), new Date(2022, 0, 20), null, 20, 'P3'],
+    ['P4', 'evaluate', new Date(2022, 0, 21), new Date(2022, 0, 27), null, 0, 'P3'],
+    ['P5', 'close', new Date(2022, 0, 28), new Date(2022, 1, 5), null, 0, 'P4']
+  ]);
+
+  var options = {
+    height: 600
+  };
+
+  var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+	
+  chart.draw(data, options);
+}
+</script>
+
+
+
+
+</body>
+</html>
